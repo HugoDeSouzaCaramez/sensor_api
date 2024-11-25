@@ -1,2 +1,4 @@
 Na raiz do projeto: python -m venv venv
 Na raiz do projeto: pip install -r requirements.txt
+
+Na raiz do projeto: python manage.py migrate
