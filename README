@@ -2,3 +2,9 @@ Na raiz do projeto: python -m venv venv
 Na raiz do projeto: pip install -r requirements.txt
 
 Na raiz do projeto: python manage.py migrate
+
+python manage.py runserver
+
+método get: http://localhost:8000/sensor_acquisitions/
+
+método get: http://localhost:8000/sensor_last_acquisition/81b9ff906e3a4388b9f653bca589c7e4/
