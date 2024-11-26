@@ -2,11 +2,13 @@ Autor: Hugo de Souza Caramez
 
 Para executar este projeto, siga o passo a passo:
 
-1° Na raiz do projeto, execute: python manage.py migrate
+1° Faça o download deste repositório
 
-2° Na raiz do projeto, execute: python manage.py runserver
+2° Na raiz do projeto, execute: python manage.py migrate
 
-3° Na raiz do projeto, execute: python process_data.py
+3° Na raiz do projeto, execute: python manage.py runserver
+
+4° Na raiz do projeto, execute: python process_data.py
 
 endpoint get: http://localhost:8000/sensor_acquisitions/
 
