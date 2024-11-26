@@ -33,6 +33,50 @@ def process_data(data):
         "desvio_padrão": pd.Series(distances).std()
     }
 
+
+def plot_and_save_graphs(df, output_dir="plots"):
+    import os
+
+    os.makedirs(output_dir, exist_ok=True)
+
+    plt.figure(figsize=(10, 6))
+    sns.boxplot(data=df[['média', 'mediana', 'máximo', 'mínimo', 'desvio_padrão']])
+    plt.title("Distribuição das Estatísticas por Sensor")
+    plt.xlabel("Métricas")
+    plt.ylabel("Valores")
+    original_filepath = os.path.join(output_dir, "todas_metricas_boxplot.png")
+    plt.savefig(original_filepath)
+    print(f"Gráfico original salvo em: {original_filepath}")
+    plt.show()
+    plt.close()
+
+    metrics = ['média', 'mediana', 'máximo', 'mínimo', 'desvio_padrão']
+    for metric in metrics:
+        plt.figure(figsize=(10, 6))
+        sns.boxplot(y=df[metric])
+        plt.title(f"Distribuição de {metric} por Sensor")
+        plt.ylabel(metric)
+        plt.xlabel("Sensores")
+        metric_filepath = os.path.join(output_dir, f"{metric}_boxplot.png")
+        plt.savefig(metric_filepath)
+        print(f"Gráfico de {metric} salvo em: {metric_filepath}")
+        plt.show()
+        plt.close()
+
+    plt.figure(figsize=(12, 8))
+    for metric in metrics:
+        sns.kdeplot(df[metric], label=metric, fill=True, alpha=0.4)
+    plt.title("Distribuição das Métricas por Sensor")
+    plt.xlabel("Valores")
+    plt.ylabel("Densidade")
+    plt.legend()
+    distribution_filepath = os.path.join(output_dir, "distribuicao_metricas.png")
+    plt.savefig(distribution_filepath)
+    print(f"Gráfico de distribuição salvo em: {distribution_filepath}")
+    plt.show()
+    plt.close()
+
+
 def main():
     platform_ids = get_sensor_platform_ids()
     results = []
@@ -48,14 +92,10 @@ def main():
         except Exception as e:
             print(f"Erro ao processar platform_id {platform_id}: {e}")
 
-
     df = pd.DataFrame(results)
     df.to_csv("sensor_statistics.csv", index=False)
 
-    plt.figure(figsize=(10, 6))
-    sns.boxplot(data=df[['média', 'mediana', 'máximo', 'mínimo', 'desvio_padrão']])
-    plt.title("Distribuição das Estatísticas por Sensor")
-    plt.show()
+    plot_and_save_graphs(df)
 
 if __name__ == "__main__":
     main()
