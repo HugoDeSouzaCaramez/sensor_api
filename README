@@ -1,3 +1,5 @@
+Autor: Hugo de Souza Caramez
+
 Para executar este projeto, siga o passo a passo:
 
 1° Na raiz do projeto, execute: python manage.py migrate
