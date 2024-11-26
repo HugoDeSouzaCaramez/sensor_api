@@ -110,9 +110,7 @@ def main():
     platform_ids = get_sensor_platform_ids()
     results = []
 
-    for i, platform_id in enumerate(platform_ids):
-        if i >= 3:
-            break
+    for platform_id in platform_ids:
         try:
             data = get_last_acquisition(platform_id)
             stats = process_data(data['sensor_acquisitions'])
