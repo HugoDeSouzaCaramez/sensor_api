@@ -26,18 +26,20 @@ def get_last_acquisition(platform_id):
 def process_data(data):
     distances = data['distance']
     return {
-        "mean": pd.Series(distances).mean(),
-        "median": pd.Series(distances).median(),
-        "max": pd.Series(distances).max(),
-        "min": pd.Series(distances).min(),
-        "std_dev": pd.Series(distances).std()
+        "média": pd.Series(distances).mean(),
+        "mediana": pd.Series(distances).median(),
+        "máximo": pd.Series(distances).max(),
+        "mínimo": pd.Series(distances).min(),
+        "desvio_padrão": pd.Series(distances).std()
     }
 
 def main():
     platform_ids = get_sensor_platform_ids()
     results = []
 
-    for platform_id in platform_ids:
+    for i, platform_id in enumerate(platform_ids):
+        if i >= 3:
+            break
         try:
             data = get_last_acquisition(platform_id)
             stats = process_data(data['sensor_acquisitions'])
@@ -51,7 +53,7 @@ def main():
     df.to_csv("sensor_statistics.csv", index=False)
 
     plt.figure(figsize=(10, 6))
-    sns.boxplot(data=df[['mean', 'median', 'max', 'min', 'std_dev']])
+    sns.boxplot(data=df[['média', 'mediana', 'máximo', 'mínimo', 'desvio_padrão']])
     plt.title("Distribuição das Estatísticas por Sensor")
     plt.show()
 
