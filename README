@@ -1,7 +1,15 @@
-Na raiz do projeto: python manage.py migrate
+Para executar este projeto, siga o passo a passo:
 
-Na raiz do projeto: python manage.py runserver
+1° Na raiz do projeto, execute: python manage.py migrate
+
+2° Na raiz do projeto, execute: python manage.py runserver
+
+3° Na raiz do projeto, execute: python process_data.py
 
 endpoint get: http://localhost:8000/sensor_acquisitions/
 
-endpoint get: http://localhost:8000/sensor_last_acquisition/<plataform_id>/
+endpoint get: http://localhost:8000/sensor_last_acquisition/<platform_id>/
+
+O banco de dados utilizado foi o db.sqlite3 que se encontra na raiz do projeto.
+
+Para visualizar os dados importados para a tabela sensors_sensoracquisition recomenda-se usar a interface gráfica de banco de dados (GUI) DBeaver
