@@ -76,6 +76,35 @@ def plot_and_save_graphs(df, output_dir="plots"):
     plt.show()
     plt.close()
 
+    for metric in metrics:
+        plt.figure(figsize=(10, 6))
+        plt.scatter(df.index, df[metric], alpha=0.7, label=metric, color='blue', edgecolor='k')
+        plt.title(f"Gráfico de Dispersão para {metric}")
+        plt.xlabel("Índice do Sensor")
+        plt.ylabel(metric)
+        plt.legend()
+        scatter_filepath = os.path.join(output_dir, f"{metric}_scatter.png")
+        plt.savefig(scatter_filepath)
+        print(f"Gráfico de dispersão de {metric} salvo em: {scatter_filepath}")
+        plt.show()
+        plt.close()
+
+    plt.figure(figsize=(12, 8))
+    colors = ['blue', 'green', 'red', 'purple', 'orange']
+    for metric, color in zip(metrics, colors):
+        plt.scatter(df.index, df[metric], label=metric, alpha=0.7, color=color, edgecolor='k')
+    plt.title("Gráfico de Dispersão para Todas as Métricas")
+    plt.xlabel("Índice do Sensor")
+    plt.ylabel("Valores")
+    plt.legend()
+    all_scatter_filepath = os.path.join(output_dir, "todas_metricas_scatter.png")
+    plt.savefig(all_scatter_filepath)
+    print(f"Gráfico de dispersão para todas as métricas salvo em: {all_scatter_filepath}")
+    plt.show()
+    plt.close()
+
+
+
 
 def main():
     platform_ids = get_sensor_platform_ids()
