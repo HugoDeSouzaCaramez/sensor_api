@@ -17,3 +17,5 @@ endpoint get: http://localhost:8000/sensor_last_acquisition/<platform_id>/
 O banco de dados utilizado foi o db.sqlite3 que se encontra na raiz do projeto.
 
 Para visualizar os dados importados para a tabela sensors_sensoracquisition recomenda-se usar a interface gráfica de banco de dados (GUI) DBeaver
+
+opcional para juntar todas as migrações numa única migração: python manage.py squashmigrations sensors 0003
